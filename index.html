@@ -4,160 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerencia de Sistemas | UPLA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #00f2fe;
-            --secondary: #4facfe;
-            --bg: #0b0e14;
-            --card-bg: rgba(255, 255, 255, 0.07);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: var(--bg); color: white; min-height: 100vh; overflow-x: hidden; }
-
-        /* --- PANTALLA DE CARGA --- */
-        #loader {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle, #1a1f2c 0%, #0b0e14 100%);
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
-        }
-
-        .course-name {
-            font-size: 1.6rem;
-            font-weight: 600;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            padding: 20px;
-            text-transform: uppercase;
-        }
-
-        /* --- DASHBOARD --- */
-        #main-content { opacity: 0; padding: 20px; transition: opacity 1s; }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0 25px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 25px;
-        }
-
-        .upla-tag {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: #0b0e14;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .unit-card {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid var(--primary);
-            transition: 0.3s;
-        }
-
-        /* --- DETALLE DE UNIDAD --- */
-        #unit-detail { display: none; }
-        .tabs { display: flex; gap: 10px; margin: 20px 0; }
-        .tab-btn {
-            flex: 1; padding: 12px; border: none; border-radius: 10px;
-            background: var(--card-bg); color: white; font-weight: 600;
-        }
-        .tab-btn.active { background: var(--primary); color: var(--bg); }
-
-        .list-item {
-            background: rgba(255,255,255,0.03);
-            padding: 15px; margin-bottom: 10px; border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .item-title { color: var(--primary); font-size: 0.9rem; font-weight: 600; }
-        .item-desc { font-size: 0.8rem; color: #aaa; margin-top: 5px; }
-
-        .btn-back { background: none; border: none; color: var(--primary); margin-bottom: 15px; font-size: 1rem; cursor: pointer; }
-
-        @keyframes pulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="iniciarPagina()">
 
     <div id="loader">
-        <p style="color: #888; letter-spacing: 2px; margin-bottom: 10px;">FACULTAD DE INGENIERÍA</p>
-        <h1 class="course-name" style="animation: pulse 2s infinite;">Gerencia de Sistemas <br> de la Información</h1>
-        <div style="margin-top: 20px; color: var(--primary); font-size: 0.8rem;">CICLO VII - 2026-I</div>
-    </div>
-
-    <div id="main-content">
-        <header>
-            <div>
-                <h2 style="font-size: 1.1rem;">[Tus Nombres y Apellidos]</h2>
-                <p style="font-size: 0.75rem; color: #888;">Ingeniería de Sistemas y Computación</p>
-            </div>
-            <div class="upla-tag">UPLA 2026</div>
-        </header>
-
-        <div id="units-list">
-            <h3 style="margin-bottom: 20px; font-weight: 400; color: var(--primary);">Contenido del Sílabo</h3>
-            <div class="unit-card" onclick="showUnit(1, 'Administración en la Nube')">
-                <h3>Unidad I</h3>
-                <p>Administración en la Nube</p>
-            </div>
-            <div class="unit-card" onclick="showUnit(2, 'Aplicaciones Empresariales')">
-                <h3>Unidad II</h3>
-                <p>Excelencia Operacional</p>
-            </div>
-            <div class="unit-card" style="opacity: 0.5;">
-                <h3>Unidad III</h3>
-                <p>Infraestructura de TI (Próximamente)</p>
-            </div>
-            <div class="unit-card" style="opacity: 0.5;">
-                <h3>Unidad IV</h3>
-                <p>Desarrollo de Sistemas (Próximamente)</p>
-            </div>
-        </div>
-
-        <div id="unit-detail">
-            <button class="btn-back" onclick="hideUnit()">← Volver</button>
-            <h2 id="unit-title" style="color: var(--primary); margin-bottom: 5px;">Unidad</h2>
-            <p id="unit-subtitle" style="font-size: 0.8rem; color: #888; margin-bottom: 20px;"></p>
-            
-            <div class="tabs">
-                <button id="t-trabajos" class="tab-btn active" onclick="setTab('trabajos')">Trabajos</button>
-                <button id="t-archivos" class="tab-btn" onclick="setTab('archivos')">Archivos (PDF)</button>
-            </div>
-
-            <div id="c-trabajos">
-                <div id="items-trabajos"></div>
-            </div>
-
-            <div id="c-archivos" style="display: none;">
-                <div id="items-archivos"></div>
+        <div class="loader-box">
+            <p class="upla-text">FACULTAD DE INGENIERÍA</p>
+            <h1 class="main-title">Gerencia de Sistemas de la Información</h1>
+            <div class="progress-container">
+                <div id="progress-bar"></div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Datos extraídos del sílabo
-        const silaboData = {
-            1: {
-                subtitle: "Administración en la Nube",
-                trabajos: [
-                    { t: "Tarea 01", d: "Interactúa para definir clases de computación y administración en la nube." }
-                ],
-                archivos: [
-                    { t: "Semana 01.
+    <div class="app-container" id="app">
+        <aside class="sidebar">
+            <div class="profile">
+                <h2 class="user-name">Tus Nombres y Apellidos</h2>
+                <span class="badge">UPLA 2026</span>
+                <p class="career">Ingeniería de Sistemas y Computación</p>
+            </div>
+
+            <nav>
+                <ul>
+                    <li class="nav-item active" onclick="cambiarUnidad(1)">Unidad I: Administración en la Nube</li>
+                    <li class="nav-item" onclick="cambiarUnidad(2)">Unidad II: Aplicaciones Empresariales</li>
+                    <li class="nav-item disabled">Unidad III: Infraestructura TI</li>
+                    <li class="nav-item disabled">Unidad IV: Desarrollo de Sistemas</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header class="content-header">
+                <h2 id="view-title">Unidad I: Administración en la Nube</h2>
+            </header>
+
+            <div class="grid-layout">
+                <section class="card">
+                    <h3>Archivos del Curso (Semana 1 - 5)</h3>
+                    <div id="archivos-list" class="list-container">
+                        </div>
+                </section>
+
+                <section class="card">
+                    <h3>Trabajos y Tareas</h3>
+                    <div id="trabajos-list" class="list-container">
+                        </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
