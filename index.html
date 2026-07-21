@@ -1,145 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerencia de Sistemas de la Información | UPLA</title>
-<link rel="stylesheet" href="style.css">
-
-<!--
-  ============================================================
-  GUÍA RÁPIDA PARA STEVE
-  ============================================================
-  1) Estructura de carpetas junto a este index.html:
-
-     /trabajos/
-       Capitulo_01_Desarrollo_Resumen_Aplicacion.docx
-       Capitulo_02_Desarrollo_Resumen_Aplicacion.docx
-       ...
-       Capitulo_15_Desarrollo_Resumen_Aplicacion.docx
-
-  2) Cada tarjeta de semana ya apunta a esa ruta con <a class="dl">.
-     Sube el .docx con el mismo nombre a la carpeta /trabajos/ y el botón
-     "Descargar" funciona solo (no hace falta subcarpeta por semana).
-
-  3) Los títulos de cada trabajo (array `weeks` dentro de script.js) están
-     en blanco salvo el Trabajo 14. Cámbialos por los reales cuando los tengas.
-
-  4) Archivos de este sitio: index.html + style.css + script.js
-     (los tres deben estar en la misma carpeta).
-  ============================================================
--->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerencia de Sistemas de la Información | UPLA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
 
-<div id="cursor-ring"></div>
-<div id="cursor-dot"></div>
-
-<div class="ambient">
-  <div class="blob blob-a"></div>
-  <div class="blob blob-b"></div>
-  <div class="blob blob-c"></div>
-</div>
-<div class="grid-fx"></div>
-<div class="cursor-glow" id="cursorGlow"></div>
-
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <span class="dots"><span></span><span></span><span></span></span>
-      <span>steve@upla:~$ <b>gerencia-sistemas</b></span>
-    </div>
-    <nav class="top-nav">
-      <a href="#unidades" class="magnetic">unidades</a>
-      <a href="#semanas" class="magnetic">trabajos semanales</a>
-    </nav>
+  <div class="ambient">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="blob blob-c"></div>
   </div>
-</header>
+  <div class="grid-fx"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-<div class="marquee">
-  <div class="marquee-track" id="marqueeTrack"></div>
-</div>
-
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-tag"><i></i> Ciclo 2026 · Curso activo</div>
-
-    <h1>
-      <span class="line"><span>GERENCIA</span></span>
-      <span class="line"><span>DE <span class="accent">SISTEMAS</span></span></span>
-      <span class="line"><span>DE LA INFORMACIÓN</span></span>
-    </h1>
-
-    <div class="hero-sub">
-      <p class="reveal-up">Administración en la nube, aplicaciones empresariales, infraestructura TI y desarrollo de sistemas — todo el material del curso, semana a semana.</p>
-      <div class="who reveal-up">Facultad de Ingeniería<br><b>Steve Barreto Roncal</b><br>Ingeniería de Sistemas y Computación</div>
-    </div>
-
-    <div class="stat-row">
-      <div class="stat reveal-up"><div class="num" data-count="4">0</div><div class="lbl">Unidades</div></div>
-      <div class="stat reveal-up"><div class="num" data-count="16">0</div><div class="lbl">Semanas</div></div>
-      <div class="stat reveal-up"><div class="num" data-count="15">0</div><div class="lbl">Trabajos</div></div>
-      <div class="stat reveal-up"><div class="num">100%</div><div class="lbl">En línea</div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="unidades">
-  <div class="wrap">
-    <div class="eyebrow reveal-up">Estructura del curso</div>
-    <h2 class="reveal-up">Unidades</h2>
-    <p class="lede reveal-up">Toca una unidad para filtrar sus semanas, o baja directo al listado completo.</p>
-
-    <div class="units-grid" id="unitsGrid">
-      <div class="tilt-card unit-card reveal-up" data-unit="1"><div class="glare"></div>
-        <div class="num">Unidad I</div>
-        <div class="name">Administración<br>en la Nube</div>
-        <div class="range"><span class="led"></span>Semanas 01–04</div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="dots"><span></span><span></span><span></span></span>
+        <span>steve@upla:~$ <b>gerencia-sistemas</b></span>
       </div>
-      <div class="tilt-card unit-card reveal-up" data-unit="2"><div class="glare"></div>
-        <div class="num">Unidad II</div>
-        <div class="name">Aplicaciones<br>Empresariales</div>
-        <div class="range"><span class="led"></span>Semanas 05–08</div>
-      </div>
-      <div class="tilt-card unit-card reveal-up" data-unit="3"><div class="glare"></div>
-        <div class="num">Unidad III</div>
-        <div class="name">Infraestructura<br>TI</div>
-        <div class="range"><span class="led"></span>Semanas 09–12</div>
-      </div>
-      <div class="tilt-card unit-card reveal-up" data-unit="4"><div class="glare"></div>
-        <div class="num">Unidad IV</div>
-        <div class="name">Desarrollo<br>de Sistemas</div>
-        <div class="range"><span class="led"></span>Semanas 13–16</div>
-      </div>
+      <nav class="top-nav">
+        <a href="#unidades" class="magnetic">unidades</a>
+        <a href="#semanas" class="magnetic">trabajos semanales</a>
+      </nav>
     </div>
+  </header>
+
+  <div class="marquee">
+    <div class="marquee-track" id="marqueeTrack"></div>
   </div>
-</section>
 
-<section class="section" id="semanas">
-  <div class="wrap">
-    <div class="eyebrow reveal-up">Trabajos del curso</div>
-    <h2 class="reveal-up">Semanas 01 — 16</h2>
-    <p class="lede reveal-up">Cada semana tiene su trabajo (resumen de aplicación), del 01 al 15. La semana 16 cierra el curso.</p>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-tag"><i></i> Ciclo 2026 · Curso activo</div>
 
-    <div class="weeks-toolbar reveal-up">
-      <span class="count" id="weeksCount">Mostrando 16 de 16 semanas</span>
-      <button class="reset-filter" id="resetFilter">Ver todas</button>
+        <h1>
+          <span class="line"><span>GERENCIA</span></span>
+          <span class="line"><span>DE <span class="accent">SISTEMAS</span></span></span>
+          <span class="line"><span>DE LA INFORMACIÓN</span></span>
+        </h1>
+
+        <div class="hero-sub">
+          <p class="reveal-up">
+            Administración en la nube, aplicaciones empresariales,
+            infraestructura TI y desarrollo de sistemas.
+          </p>
+          <div class="who reveal-up">
+            Facultad de Ingeniería<br>
+            <b>Steve Barreto Roncal</b><br>
+            Ingeniería de Sistemas y Computación
+          </div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat reveal-up"><div class="num" data-count="4">0</div><div class="lbl">Unidades</div></div>
+          <div class="stat reveal-up"><div class="num" data-count="16">0</div><div class="lbl">Semanas</div></div>
+          <div class="stat reveal-up"><div class="num" data-count="15">0</div><div class="lbl">Trabajos</div></div>
+          <div class="stat reveal-up"><div class="num">100%</div><div class="lbl">En línea</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="unidades">
+      <div class="wrap">
+        <div class="eyebrow reveal-up">Estructura del curso</div>
+        <h2 class="reveal-up">Unidades</h2>
+        <p class="lede reveal-up">Selecciona una unidad para filtrar sus semanas.</p>
+
+        <div class="units-grid">
+          <button class="tilt-card unit-card reveal-up" data-unit="1" type="button">
+            <span class="glare"></span>
+            <span class="num">Unidad I</span>
+            <span class="name">Administración<br>en la Nube</span>
+            <span class="range"><i class="led"></i> Semanas 01–04</span>
+          </button>
+
+          <button class="tilt-card unit-card reveal-up" data-unit="2" type="button">
+            <span class="glare"></span>
+            <span class="num">Unidad II</span>
+            <span class="name">Aplicaciones<br>Empresariales</span>
+            <span class="range"><i class="led"></i> Semanas 05–08</span>
+          </button>
+
+          <button class="tilt-card unit-card reveal-up" data-unit="3" type="button">
+            <span class="glare"></span>
+            <span class="num">Unidad III</span>
+            <span class="name">Infraestructura<br>TI</span>
+            <span class="range"><i class="led"></i> Semanas 09–12</span>
+          </button>
+
+          <button class="tilt-card unit-card reveal-up" data-unit="4" type="button">
+            <span class="glare"></span>
+            <span class="num">Unidad IV</span>
+            <span class="name">Desarrollo<br>de Sistemas</span>
+            <span class="range"><i class="led"></i> Semanas 13–16</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="semanas">
+      <div class="wrap">
+        <div class="eyebrow reveal-up">Trabajos del curso</div>
+        <h2 class="reveal-up">Semanas 01 — 16</h2>
+        <p class="lede reveal-up">
+          Los documentos de las semanas 01 a 15 se descargan desde esta página.
+        </p>
+
+        <div class="weeks-toolbar reveal-up">
+          <span class="count" id="weeksCount">Mostrando 16 de 16 semanas</span>
+          <button class="reset-filter" id="resetFilter" type="button">Ver todas</button>
+        </div>
+
+        <div class="weeks-grid" id="weeksGrid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span class="fmono">© 2026 · Gerencia de Sistemas de la Información · UPLA</span>
+      <a class="gh" href="https://stevekcyo.github.io/gerencia/" target="_blank" rel="noopener">
+        stevekcyo.github.io/gerencia
+      </a>
     </div>
+  </footer>
 
-    <div class="weeks-grid" id="weeksGrid"><!-- generado por script.js --></div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap footer-inner">
-    <span class="fmono">© 2026 · Gerencia de Sistemas de la Información · UPLA</span>
-    <a class="gh" href="https://stevekcyo.github.io/gerencia/" target="_blank" rel="noopener">stevekcyo.github.io/gerencia</a>
-  </div>
-</footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="script.js"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
