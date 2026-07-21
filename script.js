@@ -1,95 +1,165 @@
-const silabo = {
-    1: {
-        titulo: "Unidad I: Administración en la Nube",
-        archivos: [
-            { sem: "Semana 1", desc: "La información en la empresa: Sistemas de Información, Tipos y Componentes esenciales. Estrategia: Aprendizaje basado en problemas." },
-            { sem: "Semana 2", desc: "Computación en la nube. Estrategia: Modelos de Despliegue." },
-            { sem: "Semana 3", desc: "Administración en la nube. Estrategia: Funciones y Tecnología de soporte." },
-            { sem: "Semana 4", desc: "Infraestructura de TI: Componentes esenciales y Tipos de infraestructura de TI. Hito: Ingreso de notas al sistema de la Unidad I." }
-        ],
-        trabajos: [
-            { tarea: "Evidencia de Conocimiento 1", desc: "Saberes teóricos aplicados mediante pruebas escritas o cuestionarios (Ponderado: 10% de la unidad)." },
-            { tarea: "Evidencia de Desempeño 1", desc: "Habilidades prácticas evaluadas a través de la participación activa y presentaciones orales en clase." },
-            { tarea: "Evidencia de Producto 1", desc: "Entregable práctico inicial: Informe técnico enfocado en la administración empresarial en entornos de nube." }
-        ]
-    },
-    2: {
-        titulo: "Unidad II: Aplicaciones Empresariales",
-        archivos: [
-            { sem: "Semana 5", desc: "Los sistemas de información en los negocios: Fundamentos de inteligencia de negocios, gestión de bases de datos y administración integrada de la información." },
-            { sem: "Semana 6", desc: "Diseño de la Estructura Informática Integral de los Sistemas de Información Gerencial. Estrategia: Tres Planos (EPS)." },
-            { sem: "Semana 7", desc: "Aplicaciones empresariales y EAS (Enterprise Application Software). Usos comunes y análisis de tipologías clave: CRM, SCM, ERP, SIG." },
-            { sem: "Semana 8", desc: "Gestión de aplicaciones críticas para la nube híbrida: Software de nube híbrida diseñado para un negocio inteligente. Hito: Ingreso de notas al sistema de la Unidad II." }
-        ],
-        trabajos: [
-            { tarea: "Evidencia de Conocimiento 2", desc: "Pruebas escritas/cuestionarios de control sobre la estructura integral y software EAS (Ponderado: 15% de la unidad)." },
-            { tarea: "Evidencia de Desempeño 2", desc: "Exposición grupal de la arquitectura lógica planteada sobre los tres planos (EPS) para el control organizacional." },
-            { tarea: "Evidencia de Producto 2", desc: "Diseño y documentación técnica de la estructura informática integral adaptada a un caso de negocio." }
-        ]
-    },
-    3: {
-        titulo: "Unidad III: Infraestructura TI",
-        archivos: [
-            { sem: "Semana 9", desc: "Gobierno de TI: Alineamiento estratégico de TI con los objetivos del negocio, creación sostenible de valor y gestión integral de procesos corporativos." },
-            { sem: "Semana 10", desc: "Gestión de servicios de TI: Fundamentos y diseño de la Estrategia del servicio." },
-            { sem: "Semana 11", desc: "Diseño del servicio TI y planes de Transición efectiva del servicio hacia producción." },
-            { sem: "Semana 12", desc: "Gestión del cambio, administración del conocimiento, control de Eventos, incidencias, problemas y mesa de Centro de servicio. Hito: Ingreso de notas al sistema de la Unidad III." }
-        ],
-        trabajos: [
-            { tarea: "Evidencia de Conocimiento 3", desc: "Evaluación escrita sobre marcos de Gobierno de TI, alineamiento y gestión de servicios (Ponderado: 20% de la unidad)." },
-            { tarea: "Evidencia de Desempeño 3", desc: "Simulación de control y resolución de incidencias/problemas aplicando metodologías de gestión de servicios." },
-            { tarea: "Evidencia de Producto 3", desc: "Plan integral de Gobierno de TI y catálogo estructurado de servicios para la optimización de la infraestructura empresarial." }
-        ]
-    },
-    4: {
-        titulo: "Unidad IV: Desarrollo de Sistemas",
-        archivos: [
-            { sem: "Semana 13", desc: "El ciclo de vida del desarrollo de sistemas (SDLC) y revisión exhaustiva de Metodologías ágiles y tradicionales para el Desarrollo de Sistemas de Información." },
-            { sem: "Semana 14", desc: "Estrategias de Implementación de sistemas de información: Migración, pruebas de aceptación, despliegue y puesta en marcha." },
-            { sem: "Semana 15", desc: "Elaboración e integración del proyecto práctico final de sistemas de información aplicado directamente dentro de una empresa real." },
-            { sem: "Semana 16", desc: "Sustentación y Exposición del proyecto práctico final ante el docente. Hito: Evaluación de desempeño final (EDF) e ingreso de notas de cierre de semestre." }
-        ],
-        trabajos: [
-            { tarea: "Evidencia de Conocimiento 4", desc: "Evaluación teórica sobre metodologías de desarrollo e implementación de sistemas (Ponderado: 25% de la unidad)." },
-            { tarea: "Evidencia de Desempeño Final", desc: "Sustentación formal, defensa técnica y demostración del software e informes de la solución empresarial diseñada (Ponderado general: 30%)." },
-            { tarea: "Evidencia de Producto Final", desc: "Entregable final: Repositorio de código, documentación técnica del ciclo de vida y reporte de implementación en la organización objetivo." }
-        ]
-    }
-};
+gsap.registerPlugin(ScrollTrigger);
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-function iniciarPagina() {
-    const progress = document.getElementById('progress-bar');
-    progress.style.width = '100%';
+/* ---------- custom cursor ---------- */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+const glow = document.getElementById('cursorGlow');
+let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
 
-    setTimeout(() => {
-        document.getElementById('loader').style.transform = 'translateY(-100%)';
-        document.getElementById('app').style.opacity = '1';
-        cambiarUnidad(1);
-    }, 1800);
+window.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx+'px'; dot.style.top = my+'px';
+  glow.style.left = mx+'px'; glow.style.top = my+'px';
+});
+(function loop(){ rx += (mx-rx)*0.16; ry += (my-ry)*0.16; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(loop); })();
+
+document.querySelectorAll('a, button, .tilt-card').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('big'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('big'));
+});
+
+/* ---------- magnetic nav links ---------- */
+document.querySelectorAll('.magnetic').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const r = el.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width/2) * 0.35;
+    const dy = (e.clientY - r.top - r.height/2) * 0.6;
+    el.style.transform = `translate(${dx}px, ${dy}px)`;
+  });
+  el.addEventListener('mouseleave', () => el.style.transform = 'translate(0,0)');
+});
+
+/* ---------- marquee content ---------- */
+const marqueeItems = ['UPLA','INGENIERÍA DE SISTEMAS','GERENCIA DE SISTEMAS','CICLO 2026','NUBE · APPS · INFRAESTRUCTURA'];
+const track = document.getElementById('marqueeTrack');
+const build = marqueeItems.map(t => `<span><b>${t}</b></span>`).join('');
+track.innerHTML = build + build; // duplicado para loop continuo
+
+/* ---------- hero title reveal ---------- */
+gsap.to('.hero h1 .line span', {
+  y:'0%', duration:1, ease:'power4.out', stagger:0.12, delay:0.2
+});
+gsap.to('.hero-tag, .hero-sub .reveal-up, .stat-row .reveal-up', {
+  opacity:1, y:0, duration:0.9, ease:'power3.out', stagger:0.08, delay:0.5
+});
+
+/* ---------- animated counters ---------- */
+document.querySelectorAll('.num[data-count]').forEach(el => {
+  const target = +el.dataset.count;
+  gsap.fromTo(el, {innerText:0}, {
+    innerText:target, duration:1.4, ease:'power2.out', snap:{innerText:1}, delay:0.9,
+    onUpdate(){ el.textContent = Math.round(this.targets()[0].innerText); }
+  });
+});
+
+/* ---------- ambient blob parallax ---------- */
+gsap.utils.toArray('.blob').forEach((b,i) => {
+  gsap.to(b, {
+    yPercent: (i%2===0? 30 : -30), ease:'none',
+    scrollTrigger:{ trigger: document.body, start:'top top', end:'bottom bottom', scrub:1 }
+  });
+});
+
+/* ---------- scroll reveal for sections ---------- */
+function revealBatch(selector, opts={}){
+  gsap.utils.toArray(selector).forEach(el => {
+    gsap.fromTo(el, {opacity:0, y:40}, {
+      opacity:1, y:0, duration:0.9, ease:'power3.out',
+      scrollTrigger:{ trigger: el, start:'top 88%' }, ...opts
+    });
+  });
+}
+revealBatch('.section .eyebrow, .section h2, .section .lede, .weeks-toolbar');
+revealBatch('.unit-card', {duration:0.7});
+
+/* ---------- data: semanas 1-16 ---------- */
+const weeks = [
+  {n:1,  unit:1, chapter:1,  title:'Trabajo 01 — añade el título aquí'},
+  {n:2,  unit:1, chapter:2,  title:'Trabajo 02 — añade el título aquí'},
+  {n:3,  unit:1, chapter:3,  title:'Trabajo 03 — añade el título aquí'},
+  {n:4,  unit:1, chapter:4,  title:'Trabajo 04 — añade el título aquí'},
+  {n:5,  unit:2, chapter:5,  title:'Trabajo 05 — añade el título aquí'},
+  {n:6,  unit:2, chapter:6,  title:'Trabajo 06 — añade el título aquí'},
+  {n:7,  unit:2, chapter:7,  title:'Trabajo 07 — añade el título aquí'},
+  {n:8,  unit:2, chapter:8,  title:'Trabajo 08 — añade el título aquí'},
+  {n:9,  unit:3, chapter:9,  title:'Trabajo 09 — añade el título aquí'},
+  {n:10, unit:3, chapter:10, title:'Trabajo 10 — añade el título aquí'},
+  {n:11, unit:3, chapter:11, title:'Trabajo 11 — añade el título aquí'},
+  {n:12, unit:3, chapter:12, title:'Trabajo 12 — añade el título aquí'},
+  {n:13, unit:4, chapter:13, title:'Trabajo 13 — añade el título aquí'},
+  {n:14, unit:4, chapter:14, title:'Trabajo 14 — Desarrollo / Resumen de Aplicación'},
+  {n:15, unit:4, chapter:15, title:'Trabajo 15 — añade el título aquí'},
+  {n:16, unit:4, chapter:null, title:'Cierre de curso / Examen final'},
+];
+const unitNames = {1:'Unidad I', 2:'Unidad II', 3:'Unidad III', 4:'Unidad IV'};
+const pad = n => String(n).padStart(2,'0');
+const fileHref = w => w.chapter ? `trabajos/Capitulo_${pad(w.chapter)}_Desarrollo_Resumen_Aplicacion.docx` : null;
+
+const grid = document.getElementById('weeksGrid');
+grid.innerHTML = weeks.map(w => {
+  const href = fileHref(w);
+  const isFinal = !w.chapter;
+  const stateClass = isFinal ? 'final' : 'pending';
+  const statusText = isFinal ? 'Cierre de curso' : 'Archivo por confirmar';
+  return `
+    <div class="tilt-card week-card ${stateClass} reveal-up" data-unit="${w.unit}">
+      <div class="glare"></div>
+      <div class="row-top">
+        <span class="wk">SEMANA<br><b>${pad(w.n)}</b></span>
+        <span class="unit-tag">${unitNames[w.unit]}</span>
+      </div>
+      <div class="w-title">${w.title}</div>
+      <div class="row-bottom">
+        <span class="status-label"><span class="led-mini"></span>${statusText}</span>
+        ${href ? `<a class="dl" href="${href}" target="_blank" rel="noopener">Descargar</a>` : `<a class="dl" href="#">Ver detalle</a>`}
+      </div>
+    </div>
+  `;
+}).join('');
+
+revealBatch('.week-card', {duration:0.6});
+
+/* ---------- 3D tilt on all .tilt-card ---------- */
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    if(reduceMotion) return;
+    const r = card.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    const rotX = (0.5 - py) * 14;
+    const rotY = (px - 0.5) * 14;
+    gsap.to(card, {rotateX:rotX, rotateY:rotY, duration:0.4, ease:'power2.out', transformPerspective:800});
+    card.style.setProperty('--gx', (px*100)+'%');
+    card.style.setProperty('--gy', (py*100)+'%');
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, {rotateX:0, rotateY:0, duration:0.6, ease:'power3.out'});
+  });
+});
+
+/* ---------- unit filter ---------- */
+const unitCards = document.querySelectorAll('.unit-card');
+const weeksCount = document.getElementById('weeksCount');
+let activeUnit = null;
+
+function applyFilter(){
+  const cards = document.querySelectorAll('.week-card');
+  let visible = 0;
+  cards.forEach(c => {
+    const match = !activeUnit || c.dataset.unit === String(activeUnit);
+    c.classList.toggle('hidden-by-filter', !match);
+    if(match) visible++;
+  });
+  weeksCount.textContent = `Mostrando ${visible} de ${cards.length} semanas`;
+  unitCards.forEach(u => u.classList.toggle('active', activeUnit === u.dataset.unit));
 }
 
-function cambiarUnidad(id) {
-    const data = silabo[id];
-    if (!data) return;
-
-    document.getElementById('view-title').innerText = data.titulo;
-
-    // Render Archivos
-    let archHTML = '';
-    data.archivos.forEach(a => {
-        archHTML += `<div class="list-item"><b>${a.sem}</b> ${a.desc}</div>`;
-    });
-    document.getElementById('archivos-list').innerHTML = archHTML;
-
-    // Render Trabajos
-    let trabHTML = '';
-    data.trabajos.forEach(t => {
-        trabHTML += `<div class="list-item"><b>${t.tarea}</b> ${t.desc}</div>`;
-    });
-    document.getElementById('trabajos-list').innerHTML = trabHTML;
-
-    // Actualizar Estado Activo del Menú
-    document.querySelectorAll('.nav-item').forEach((item, index) => {
-        item.classList.toggle('active', (index + 1) === id);
-    });
-}
+unitCards.forEach(u => {
+  u.addEventListener('click', () => {
+    activeUnit = (activeUnit === u.dataset.unit) ? null : u.dataset.unit;
+    applyFilter();
+    document.getElementById('semanas').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+document.getElementById('resetFilter').addEventListener('click', () => { activeUnit = null; applyFilter(); });
